@@ -16,7 +16,15 @@ WA.onInit().then(() => {
         const time = today.getHours() + ":" + today.getMinutes();
         currentPopup = WA.ui.openPopup("clockPopup", "It's " + time, []);
     })
-
+    WA.room.onEnterLayer("test").subscribe(() => {
+        console.log('Enter test layer');
+        WA.room.setTiles([
+            { x: 8, y: 15, tile: "MyCollides", layer: "main" },
+            { x: 9, y: 15, tile: "MyCollides", layer: "main" },
+          ]);
+        WA.room.showLayer("dark");
+      });
+    // documentation https://docs.workadventu.re/developer/map-scripting/references/api-room
     WA.room.area.onLeave('clock').subscribe(closePopup)
 
     // The line below bootstraps the Scripting API Extra library that adds a number of advanced properties/features to WorkAdventure
